@@ -6,8 +6,19 @@ const INITIAL_STATE = {
       commentNo: "0001",
       userName: "TOMO",
       dateAndTime: new Date(),
-      message: [`Welcome to "Discussion Thread"!!`,`Let's post your first comment!!!`],
-    }
+      message: [
+        `Welcome to "Chatting Place"!!`,
+        `Hi, I'm Tomo, I developed this chat app!!`,
+      ],
+    },
+    {
+      commentNo: "0002",
+      userName: "TOMO",
+      dateAndTime: new Date(),
+      message: [
+        `Please leave your first comment!!`,
+      ],
+    },
   ],
 };
 
