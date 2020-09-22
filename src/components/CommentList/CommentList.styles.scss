@@ -1,0 +1,27 @@
+.commentList {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 2rem auto;
+    max-width: 500px;
+    text-align: left;
+
+    li {
+        border: gray solid 1px;
+        padding: .25rem;
+        margin-bottom: .5rem;
+
+        p {
+            margin: .5rem;
+        }
+
+        .commentData {
+            font-size: .75rem;
+
+            * {
+                margin-right: .5rem;
+            }
+        }
+
+    }
+
+}
