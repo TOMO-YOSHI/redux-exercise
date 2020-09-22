@@ -1,27 +1,33 @@
-.commentList {
-    list-style-type: none;
-    padding-left: 0;
-    margin: 2rem auto;
-    max-width: 500px;
-    text-align: left;
+.commentListWrapper {
+    background-color: grey;
+    padding: 2rem;
+    height: 100%;
 
-    li {
-        border: gray solid 1px;
-        padding: .25rem;
-        margin-bottom: .5rem;
+    .commentList {
+        list-style-type: none;
+        padding-left: 0;
+        margin: auto;
+        max-width: 500px;
+        text-align: left;
 
-        p {
-            margin: .5rem;
-        }
+        li {
+            border: gray solid 1px;
+            padding: .25rem;
+            margin-bottom: .5rem;
+            background-color: white;
 
-        .commentData {
-            font-size: .75rem;
-
-            * {
-                margin-right: .5rem;
+            p {
+                margin: .5rem;
             }
+
+            .commentData {
+                font-size: .75rem;
+
+                * {
+                    margin-right: .5rem;
+                }
+            }
+
         }
-
     }
-
 }
