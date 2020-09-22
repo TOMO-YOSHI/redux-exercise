@@ -8,25 +8,28 @@ const CommentListItem = (props) => {
         <p className="commentData">
           <span className="commentNo">No.{comment.commentNo}</span>
           <span className="commentName">{comment.userName}</span>
-          <span className="commentDate">
-            {comment.dateAndTime.getDate()}/
-            {comment.dateAndTime.getMonth() + 1}/
-            {comment.dateAndTime.getFullYear()}
-          </span>
-          <span className="commentTime">
-            {comment.dateAndTime.getHours()}:
-            {comment.dateAndTime.getMinutes() < 10
-              ? "0" + comment.dateAndTime.getMinutes()
-              : comment.dateAndTime.getMinutes()}
-          </span>
+          <span className="commentDate">{comment.date}</span>
+          <span className="commentTime">{comment.time}</span>
         </p>
         <div className="commentMessage">
-          {comment.message.map((p) => (
-            <p key={p}>{p}</p>
-          ))}
+          <p>{comment.message}</p>
         </div>
       </li>
     );
 }
 
 export default CommentListItem;
+
+            // {comment.dateAndTime.getDate()}/
+            // {comment.dateAndTime.getMonth() + 1}/
+            // {comment.dateAndTime.getFullYear()}
+
+            // {comment.dateAndTime.getHours()}:
+            // {comment.dateAndTime.getMinutes() < 10
+            //   ? "0" + comment.dateAndTime.getMinutes()
+            //   : comment.dateAndTime.getMinutes()}
+
+                    //   {
+                    //     comment.message.map((p) => <p key={p}>{p}</p>);
+                    //   }
+

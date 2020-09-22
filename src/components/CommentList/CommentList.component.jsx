@@ -1,25 +1,30 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { commentListSetUp } from '../../redux/comment/comment.actions.js';
+import { commentsInitiate } from '../../redux/comment/comment.operations.js';
+import { getCommentList } from '../../redux/comment/comment.selector.js';
 
 import CommentListItem from '../CommentListItem/CommentListItem.component';
 
 import './CommentList.styles.scss';
 
+import { getCommentsFromFirebase } from '../../firebase/firebase.js'
+
 const CommentList = () => {
-    const comments = useSelector((state) => state.comments);
     const dispatch = useDispatch();
-    let commentList = comments.commentList;
+    const state = useSelector((state) => state);
+    let commentList = getCommentList(state);
 
     useEffect(() => {
-      dispatch(commentListSetUp());
+      dispatch(commentsInitiate("caht-greeting"));
     //   console.log(commentList);
     },[]);
 
     useEffect(()=>{
         const obj = document.querySelector(".commentListWrapper");
         obj.scrollTop = obj.scrollHeight;
-    }, [comments])
+        console.log(commentList);
+    }, [commentList])
 
     return (
       <div className="commentListWrapper">

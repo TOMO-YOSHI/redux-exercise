@@ -1,11 +1,11 @@
 export const commentActionTypes = {
-    COMMENTLIST_SETUP: "COMMENTLIST_SETUP",
-    ADD_NEWCOMMENT: "ADD_NEWCOMMENT"
+  COMMENTLIST_SETUP: "COMMENTLIST_SETUP",
+  ADD_NEWCOMMENT: "ADD_NEWCOMMENT",
 };
 
-export const commentListSetUp = () => ({
+export const commentListSetUp = (comments) => ({
   type: commentActionTypes.COMMENTLIST_SETUP,
-  // payload: comments
+  payload: comments
 });
 
 export const addNewComment = (comment) => ({
