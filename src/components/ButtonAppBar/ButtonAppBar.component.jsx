@@ -70,7 +70,7 @@ export default function ButtonAppBar() {
         console.log(topic);
         setheaderText(topic);
       });
-    }, [commentList]);
+    });
     
   return (
     <div className={classes.root}>
@@ -90,7 +90,11 @@ export default function ButtonAppBar() {
             <IconButton
               edge="start"
               className={classes.menuButton}
-              color="black"
+              style={{ 
+                color: "#100c08",
+                cursor: "inherit"
+
+               }}
               aria-label="menu"
               onClick={() => history.push("/redux-exercise/")}
             >
