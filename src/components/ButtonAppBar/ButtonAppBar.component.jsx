@@ -76,14 +76,27 @@ export default function ButtonAppBar() {
     <div className={classes.root}>
       <AppBar position="static" style={{ background: "#100c08" }}>
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
+          {headerText !== "Chat Place" ? (
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="menu"
+              onClick={() => history.push("/redux-exercise/")}
+            >
+              <MenuIcon />
+            </IconButton>
+          ) : (
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="black"
+              aria-label="menu"
+              onClick={() => history.push("/redux-exercise/")}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
           <Typography variant="h6" className={classes.title}>
             {headerText}
           </Typography>

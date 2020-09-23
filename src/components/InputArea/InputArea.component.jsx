@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import IconLabelButtons from "../IconLabelButton/IconLabelButton.component";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { addCommentToDatabase } from '../../redux/comment/comment.operations.js';
@@ -96,12 +97,14 @@ const InputArea = (props) => {
             value={message}
             required
           />
-          <button type="submit" onClick={submitComment}>
-            SUBMIT
-          </button>
+          <IconLabelButtons type="submit" click={submitComment} />
         </form>
       </div>
     );
 }
 
 export default InputArea;
+
+          // <button type="submit" onClick={submitComment}>
+          //   SUBMIT
+          // </button>;
