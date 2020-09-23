@@ -57,7 +57,12 @@ export default function ButtonAppBar() {
       return history.listen((location) => {
         let topic = location.pathname;
 
-        if (topic === "/redux-exercise" || topic === "/" || topic === "") {
+        if (
+          topic === "/redux-exercise" ||
+          topic === "/redux-exercise/" ||
+          topic === "/" ||
+          topic === ""
+        ) {
           topic = "Chat Place";
         } else {
           topic = topic.slice(topic.lastIndexOf("/") + 1);
