@@ -1,10 +1,13 @@
 .homePageDiv {
-    // margin-top: 56px;
     height: 100%;
-    // padding-top: 65px;
 
     .homePageBody {
         padding-top: 75px;
+        height: 100%;
+
+        @media screen and (max-width: 599px) {
+            padding-top: 65px;
+        }
     }
 
     h2 {
@@ -15,5 +18,99 @@
     ul {
         list-style: none;
         padding-left: 0;
+        height: 100%;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        li {
+            border: black solid 1px;
+            color: white;
+            transition: ease .5s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            
+
+            &:hover {
+                cursor: pointer;
+                opacity: .8;
+                background-size:cover;
+                background-blend-mode: multiply;
+            }
+
+            span {
+                display: block;
+                font-family: 'Dancing Script', cursive;
+                font-size: 22px;
+                font-weight: 600;
+            }
+        }
+
+        // .topicGreeting,
+        // .topicFood,
+        // .topicMovie,
+        // .topicProgramming,
+        // .topicOutdoor,
+        // .topicTraveling,
+        // .topicSchool {
+        //     background-size:cover;
+        //     background-blend-mode: multiply;
+        //     background-repeat: no-repeat;
+        // }
+
+        .topicGreeting {
+            grid-column: span 2;
+
+            background:url("../../images/greeting.jpg") rgba(130, 130, 130, 0.5);
+            background-size:cover;
+            background-blend-mode: multiply;
+            background-repeat: no-repeat;
+        }
+        .topicFood {
+            grid-row: span 2;
+
+            background:url("../../images/food.jpg") rgba(130, 130, 130, 0.5);
+            background-size:cover;
+            background-blend-mode: multiply;
+            background-repeat: no-repeat;
+        }
+        .topicMovie {
+            background:url("../../images/movie.jpg") rgba(130, 130, 130, 0.5);
+            background-size:cover;
+            background-blend-mode: multiply;
+            background-repeat: no-repeat;
+        }
+        .topicProgramming {
+            grid-row: span 2;
+
+            background:url("../../images/programming.jpg") rgba(130, 130, 130, 0.5);
+            background-size:cover;
+            background-blend-mode: multiply;
+            background-repeat: no-repeat;
+        }
+        .topicOutdoor {
+            background:url("../../images/outdoor.jpg") rgba(130, 130, 130, 0.5);
+            background-size:cover;
+            background-blend-mode: multiply;
+            background-repeat: no-repeat;
+        }
+        .topicTraveling {
+            grid-row: span 2;
+
+            background:url("../../images/traveling.jpg") rgba(130, 130, 130, 0.5);
+            background-size:cover;
+            background-blend-mode: multiply;
+            background-repeat: no-repeat;
+        }
+        .topicSchool {
+            grid-row: span 2;
+
+            background:url("../../images/school.jpg") rgba(130, 130, 130, 0.5);
+            background-size:cover;
+            background-blend-mode: multiply;
+            background-repeat: no-repeat;
+        }
     }
 }

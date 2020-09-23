@@ -17,12 +17,16 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     position: "fixed",
     width: "100%",
+    zIndex: 100
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
+    fontFamily: "'Dancing Script', cursive",
+    fontWeight: 600,
+    fontSize: "2rem"
   },
 }));
 
@@ -35,25 +39,25 @@ export default function ButtonAppBar() {
 
     let history = useHistory();
 
+    // useEffect(() => {
+    //   return history.listen((location) => {
+    //     let topic = location.pathname;
+
+    //     if (topic === "/redux-exercise" || topic === "" || topic === "/") {
+    //       topic = "Chat Place";
+    //     } else {
+    //       topic = topic.slice(topic.lastIndexOf("/") + 1);
+    //     }
+    //     console.log(topic);
+    //     setheaderText(topic);
+    //   });
+    // }, [history]);
+
     useEffect(() => {
       return history.listen((location) => {
         let topic = location.pathname;
 
-        if (topic === "/" || topic === "") {
-          topic = "Chat Place";
-        } else {
-          topic = topic.slice(topic.lastIndexOf("/") + 1);
-        }
-        console.log(topic);
-        setheaderText(topic);
-      });
-    }, [history]);
-
-    useEffect(() => {
-      return history.listen((location) => {
-        let topic = location.pathname;
-
-        if (topic === "/" || topic === "") {
+        if (topic === "/redux-exercise" || topic === "/" || topic === "") {
           topic = "Chat Place";
         } else {
           topic = topic.slice(topic.lastIndexOf("/") + 1);
@@ -62,18 +66,6 @@ export default function ButtonAppBar() {
         setheaderText(topic);
       });
     }, [commentList]);
-
-    // useEffect(() => {
-    //   let topic = history.location.pathname;
-
-    //   if (topic === "/" || topic === "") {
-    //     topic = "Chat Place";
-    //   } else {
-    //     topic = topic.slice(topic.lastIndexOf("/") + 1);
-    //   }
-    //   console.log(topic);
-    //   setheaderText(topic);
-    // })
     
   return (
     <div className={classes.root}>
@@ -88,7 +80,7 @@ export default function ButtonAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            {headerText.toUpperCase()}
+            {headerText}
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>

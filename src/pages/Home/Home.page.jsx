@@ -15,26 +15,49 @@ const Home = (props) => {
               onClick={() =>
                 props.history.push("/redux-exercise/chat/greeting")
               }
+              className="topicGreeting"
             >
-              Greeting
+              <span>Greeting</span>
             </li>
-            <li>
-              <Link to="/redux-exercise/chat/food">Food</Link>
+            <li
+              onClick={() => props.history.push("/redux-exercise/chat/food")}
+              className="topicFood"
+            >
+              <span>Food</span>
             </li>
-            <li>
-              <Link to="/chat">Movie</Link>
+            <li
+              onClick={() => props.history.push("/redux-exercise/chat/movie")}
+              className="topicMovie"
+            >
+              <span>Movie</span>
             </li>
-            <li>
-              <Link to="/chat">Programming</Link>
+            <li
+              onClick={() =>
+                props.history.push("/redux-exercise/chat/programming")
+              }
+              className="topicProgramming"
+            >
+              <span>Programming</span>
             </li>
-            <li>
-              <Link to="/chat">Outdoor Activity</Link>
+            <li
+              onClick={() => props.history.push("/redux-exercise/chat/outdoor")}
+              className="topicOutdoor"
+            >
+              <span>Outdoor Activity</span>
             </li>
-            <li>
-              <Link to="/chat">Travering</Link>
+            <li
+              onClick={() =>
+                props.history.push("/redux-exercise/chat/traveling")
+              }
+              className="topicTraveling"
+            >
+              <span>Traveling</span>
             </li>
-            <li>
-              <Link to="/chat">Romance</Link>
+            <li
+              onClick={() => props.history.push("/redux-exercise/chat/school")}
+              className="topicSchool"
+            >
+              <span>School</span>
             </li>
           </ul>
         </div>

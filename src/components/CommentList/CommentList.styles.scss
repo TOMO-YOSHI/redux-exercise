@@ -6,10 +6,10 @@
     // background-image: url("../../images/greeting.jpg");
     // background-repeat: no-repeat;
     // background-size: cover;
-    background:url("../../images/greeting.jpg") rgba(130, 130, 130, 0.8);
-    background-size:cover;
-    background-blend-mode: multiply;
-    background-repeat: no-repeat;
+    // background:url("../../images/greeting.jpg") rgba(130, 130, 130, 0.8);
+    // background-size:cover;
+    // background-blend-mode: multiply;
+    // background-repeat: no-repeat;
 
 
     @media screen and (max-width: 599px) {
@@ -51,4 +51,47 @@
 
         }
     }
+}
+
+.greetingBackGround {
+    background:url("../../images/greeting.jpg") rgba(130, 130, 130, 0.8);
+    background-size:cover;
+    background-blend-mode: multiply;
+    background-repeat: no-repeat;
+}
+.foodBackGround {
+    background:url("../../images/food.jpg") rgba(130, 130, 130, 0.8);
+    background-size:cover;
+    background-blend-mode: multiply;
+    background-repeat: no-repeat;
+}
+.movieBackGround {
+    background:url("../../images/movie.jpg") rgba(130, 130, 130, 0.8);
+    background-size:cover;
+    background-blend-mode: multiply;
+    background-repeat: no-repeat;
+}
+.programmingBackGround {
+    background:url("../../images/programming.jpg") rgba(130, 130, 130, 0.8);
+    background-size:cover;
+    background-blend-mode: multiply;
+    background-repeat: no-repeat;
+}
+.outdoorBackGround {
+    background:url("../../images/outdoor.jpg") rgba(130, 130, 130, 0.8);
+    background-size:cover;
+    background-blend-mode: multiply;
+    background-repeat: no-repeat;
+}
+.travelingBackGround {
+    background:url("../../images/traveling.jpg") rgba(130, 130, 130, 0.8);
+    background-size:cover;
+    background-blend-mode: multiply;
+    background-repeat: no-repeat;
+}
+.schoolBackGround {
+    background:url("../../images/school.jpg") rgba(130, 130, 130, 0.8);
+    background-size:cover;
+    background-blend-mode: multiply;
+    background-repeat: no-repeat;
 }

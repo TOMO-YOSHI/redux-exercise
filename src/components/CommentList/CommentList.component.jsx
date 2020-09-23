@@ -10,6 +10,8 @@ import './CommentList.styles.scss';
 const CommentList = (props) => {
     const topic = props.topic;
 
+    const classNameForBackgroundImage = topic + "BackGround";
+
     const dispatch = useDispatch();
     const state = useSelector((state) => state);
     let commentList = getCommentList(state);
@@ -28,7 +30,7 @@ const CommentList = (props) => {
     }, [commentList])
 
     return (
-      <div className="commentListWrapper">
+      <div className={"commentListWrapper" + " " + classNameForBackgroundImage}>
         <ul className="commentList">{
             commentList.map(comment => 
                 <CommentListItem key={comment.commentNo} comment={comment} />
