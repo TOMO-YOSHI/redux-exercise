@@ -1,4 +1,4 @@
-import { commentListSetUp } from './comment.actions';
+import { commentListSetUp, addNewComment } from './comment.actions';
 
 import { firestore } from '../../firebase/firebase'
 
@@ -7,24 +7,28 @@ export const commentsInitiate = (collectionId) => {
       const collectionRef = firestore.collection(collectionId);
       let comments = [];
 
-      await collectionRef.get().then((snapshot) => {
-        snapshot.forEach((doc) => {
-          const comment = doc.data();
-        //   console.log(comment);
-          comments.push(comment);
+      await collectionRef
+        .orderBy("commentNo")
+        .get()
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            const comment = doc.data();
+            //   console.log(comment);
+            comments.push(comment);
+          });
         });
-      });
 
     //   console.log(comments);
       dispatch(commentListSetUp(comments));
     }
 }
-// export const commentsInitiate = (collectionId) => {
-//     return async (dispatch, getState) => {
-//         const comments = await getCommentsFromFirebase(collectionId);
-//         // dispatch(commentListSetUp(comments));
-//         dispatch(getCommentsFromFirestore(comments));
-//         console.log(comments);
-//         // return comments;
-//     }
-// }
+
+export const addCommentToDatabase = (collectionId, comment) => {
+    return async (dispatch, getState) => {
+      const collectionRef = firestore.collection(collectionId);
+
+      await collectionRef.add(comment)
+
+      dispatch(addNewComment(comment));
+    }
+}

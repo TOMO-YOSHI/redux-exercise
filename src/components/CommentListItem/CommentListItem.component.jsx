@@ -19,17 +19,3 @@ const CommentListItem = (props) => {
 }
 
 export default CommentListItem;
-
-            // {comment.dateAndTime.getDate()}/
-            // {comment.dateAndTime.getMonth() + 1}/
-            // {comment.dateAndTime.getFullYear()}
-
-            // {comment.dateAndTime.getHours()}:
-            // {comment.dateAndTime.getMinutes() < 10
-            //   ? "0" + comment.dateAndTime.getMinutes()
-            //   : comment.dateAndTime.getMinutes()}
-
-                    //   {
-                    //     comment.message.map((p) => <p key={p}>{p}</p>);
-                    //   }
-

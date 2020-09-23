@@ -23,25 +23,3 @@ export const firestore = firebase.firestore();
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
-
-// export const getCommentsFromFirebase = async (collectionKey) => {
-//   const collectionRef = firestore.collection(collectionKey);
-//   let comments = [];
-
-// //   return comments = collectionRef.get().then((snapshot) => {
-// //       snapshot.forEach((doc) => {
-// //         return doc.data();
-// //       })
-// //   })
-
-//   collectionRef.get().then((snapshot) => {
-//       snapshot.forEach((doc) => {
-//         const comment = doc.data();
-//         console.log(comment);
-//         comments.push(comment);
-//       })
-//   })
-
-//   console.log(comments);
-//   return comments;
-// };
