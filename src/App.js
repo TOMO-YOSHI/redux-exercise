@@ -13,8 +13,8 @@ function App() {
     <div className="App">
       <ButtonAppBar />
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/chat/:topic" component={Chat} />
+        <Route exact path="/redux-exercise" component={Home} />
+        <Route path="/redux-exercise/chat/:topic" component={Chat} />
       </Switch>
     </div>
   );

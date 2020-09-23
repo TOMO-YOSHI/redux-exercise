@@ -11,13 +11,31 @@ const Home = (props) => {
           <h2>Choose the Topic</h2>
           <p>You want to talk about</p>
           <ul>
-            <li onClick={() => props.history.push('/chat/greeting')}>Greeting</li>
-            <li><Link to="/chat/food">Food</Link></li>
-            <li><Link to="/chat">Movie</Link></li>
-            <li><Link to="/chat">Programming</Link></li>
-            <li><Link to="/chat">Outdoor Activity</Link></li>
-            <li><Link to="/chat">Travering</Link></li>
-            <li><Link to="/chat">Romance</Link></li>
+            <li
+              onClick={() =>
+                props.history.push("/redux-exercise/chat/greeting")
+              }
+            >
+              Greeting
+            </li>
+            <li>
+              <Link to="/redux-exercise/chat/food">Food</Link>
+            </li>
+            <li>
+              <Link to="/chat">Movie</Link>
+            </li>
+            <li>
+              <Link to="/chat">Programming</Link>
+            </li>
+            <li>
+              <Link to="/chat">Outdoor Activity</Link>
+            </li>
+            <li>
+              <Link to="/chat">Travering</Link>
+            </li>
+            <li>
+              <Link to="/chat">Romance</Link>
+            </li>
           </ul>
         </div>
       </div>
