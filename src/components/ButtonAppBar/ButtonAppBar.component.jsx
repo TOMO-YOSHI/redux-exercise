@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     position: "fixed",
-    width: "100%"
+    width: "100%",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -77,7 +77,7 @@ export default function ButtonAppBar() {
     
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" style={{ background: "#100c08" }}>
         <Toolbar>
           <IconButton
             edge="start"

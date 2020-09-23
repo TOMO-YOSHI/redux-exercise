@@ -3,6 +3,18 @@
     padding: 2rem;
     overflow: scroll;
     // height: 100%;
+    // background-image: url("../../images/greeting.jpg");
+    // background-repeat: no-repeat;
+    // background-size: cover;
+    background:url("../../images/greeting.jpg") rgba(130, 130, 130, 0.8);
+    background-size:cover;
+    background-blend-mode: multiply;
+    background-repeat: no-repeat;
+
+
+    @media screen and (max-width: 599px) {
+        margin-top: 48px;
+    }
 
     .commentList {
         list-style-type: none;
