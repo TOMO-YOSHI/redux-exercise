@@ -1,15 +1,51 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { getUserInfo } from '../../redux/user/user.selector.js';
 
-import { Link } from 'react-router-dom'
+import { auth } from '../../firebase/firebase'
 
 import './Home.styles.scss';
 
 const Home = (props) => {
+  const [userName, setUserName] = useState("");
+  const [userIsLogin, setUserIsLogin] = useState(false);
+  const state = useSelector(state => state);
+  const userInfo = getUserInfo(state);
+
+
+  useEffect(()=>{
+    const unsubscribe = auth.onAuthStateChanged(function (userAuth) {
+      if (userAuth) {
+        setUserName(userInfo.userName);
+        setUserIsLogin(true);
+        // console.log(userInfo);
+      } else {
+        setUserName(userInfo.userName);
+        setUserIsLogin(false);
+        // console.log(userInfo);
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    }
+  })
+
     return (
       <div className="homePageDiv">
         <div className="homePageBody">
-          <h2>Choose the Topic</h2>
-          <p>You want to talk about</p>
+          { !userIsLogin ? (
+            <React.Fragment>
+              <h2>Choose the Topic</h2>
+              <p>You want to talk about</p>
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <p className="hiName">Hi, {userName} !</p>
+              <h2>Choose the Topic</h2>
+              <p>You want to talk about</p>
+            </React.Fragment>
+          )}
           <ul>
             <li
               onClick={() =>

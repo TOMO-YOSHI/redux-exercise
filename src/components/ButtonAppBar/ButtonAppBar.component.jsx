@@ -12,6 +12,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { useHistory } from 'react-router-dom';
 
 import { auth } from '../../firebase/firebase.js';
+import { userLogout } from '../../redux/user/user.actions.js';
 
 import './ButtonAppBar.styles.scss'
 
@@ -36,8 +37,8 @@ const useStyles = makeStyles((theme) => ({
 export default function ButtonAppBar() {
     const [headerText, setheaderText] = useState("Chat Place");
     const [userIsLogin, setUserIsLogin] = useState(false);
-    const state = useSelector(state => state);
-    const user = state.user.userInfo;
+    // const state = useSelector(state => state);
+    // const user = state.user.userInfo;
 
     const classes = useStyles();
 
@@ -114,7 +115,12 @@ export default function ButtonAppBar() {
           { userIsLogin ? (
             <Button
               color="inherit"
-              onClick={() => auth.signOut()}
+              onClick={
+                () => {
+                  auth.signOut();
+                  userLogout();
+                }
+              }
             >
               Logout
             </Button>
