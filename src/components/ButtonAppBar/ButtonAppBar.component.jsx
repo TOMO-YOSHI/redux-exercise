@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCommentList } from "../../redux/comment/comment.selector.js";
 
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -11,6 +10,8 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 
 import { useHistory } from 'react-router-dom';
+
+import { auth } from '../../firebase/firebase.js';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,23 +36,11 @@ export default function ButtonAppBar() {
 
     const classes = useStyles();
     const state = useSelector(state => state);
-    let commentList = getCommentList(state);
+    const user = state.user.userInfo;
+
+    console.log(user);
 
     let history = useHistory();
-
-    // useEffect(() => {
-    //   return history.listen((location) => {
-    //     let topic = location.pathname;
-
-    //     if (topic === "/redux-exercise" || topic === "" || topic === "/") {
-    //       topic = "Chat Place";
-    //     } else {
-    //       topic = topic.slice(topic.lastIndexOf("/") + 1);
-    //     }
-    //     console.log(topic);
-    //     setheaderText(topic);
-    //   });
-    // }, [history]);
 
     useEffect(() => {
       return history.listen((location) => {
@@ -102,12 +91,21 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             {headerText}
           </Typography>
-          <Button
-            color="inherit"
-            onClick={() => history.push("/redux-exercise/login")}
-          >
-            Login
-          </Button>
+          { user.isLogin ? (
+            <Button
+              color="inherit"
+              onClick={() => auth.signOut()}
+            >
+              Logout
+            </Button>
+          ) : (
+            <Button
+              color="inherit"
+              onClick={() => history.push("/redux-exercise/login")}
+            >
+              Login
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </div>

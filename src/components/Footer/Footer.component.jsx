@@ -9,9 +9,8 @@ const Footer = () => {
     return (
       <footer className="pageFooter">
         <div className="nameAndCopyDiv">
-          <p className="authorName">Author: Tomohiro Yoshida</p>
           <p className="footerCopyright">
-            &copy; 2020 Chat Place. All Rights Reserved
+            &copy; 2020 Tomohiro Yoshida. All Rights Reserved
           </p>
         </div>
 
@@ -37,3 +36,8 @@ const Footer = () => {
 }
 
 export default Footer;
+
+        //   <p className="authorName">Author: Tomohiro Yoshida</p>
+        //   <p className="footerCopyright">
+        //     &copy; 2020 Chat Place. All Rights Reserved
+        //   </p>

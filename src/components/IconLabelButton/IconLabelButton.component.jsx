@@ -18,10 +18,10 @@ export default function IconLabelButton(props) {
       color="primary"
       style={{ background: "#100c08" }}
       className={classes.button}
-      endIcon={<Icon>send</Icon>}
+      endIcon={props.icon !== null ? <Icon>{props.icon}</Icon> : null}
       onClick={props.click}
     >
-      Send
+      {props.text}
     </Button>
   );
 }

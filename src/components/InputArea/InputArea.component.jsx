@@ -97,7 +97,7 @@ const InputArea = (props) => {
             value={message}
             required
           />
-          <IconLabelButtons type="submit" click={submitComment} />
+          <IconLabelButtons text="send" icon="send" type="submit" click={submitComment} />
         </form>
       </div>
     );
