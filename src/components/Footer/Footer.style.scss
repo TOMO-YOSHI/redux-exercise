@@ -13,12 +13,13 @@
     }
 
     .authorName {
-        margin-top: 0;
+        margin: 0;
+        margin-bottom: .1rem;
         font-size: .7rem;
     }
 
     .footerCopyright {
-        margin-bottom: 0;
+        margin: 0;
     }
 
     .contactList {
@@ -35,7 +36,7 @@
 
     a {
         color: #100c08;
-        font-size: 22px;
+        font-size: 24px;
         transition: ease .2s;
     }
 

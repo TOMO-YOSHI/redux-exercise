@@ -90,13 +90,11 @@ export default function ButtonAppBar() {
             <IconButton
               edge="start"
               className={classes.menuButton}
-              style={{ 
+              style={{
                 color: "#100c08",
-                cursor: "inherit"
-
-               }}
+                cursor: "inherit",
+              }}
               aria-label="menu"
-              onClick={() => history.push("/redux-exercise/")}
             >
               <MenuIcon />
             </IconButton>
@@ -104,7 +102,12 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             {headerText}
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button
+            color="inherit"
+            onClick={() => history.push("/redux-exercise/login")}
+          >
+            Login
+          </Button>
         </Toolbar>
       </AppBar>
     </div>

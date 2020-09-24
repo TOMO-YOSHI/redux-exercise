@@ -1,0 +1,12 @@
+.loginPageDiv {
+    height: 100vh;
+
+    .loginPageBody {
+        padding-top: 75px;
+        // height: 100%;
+
+        @media screen and (max-width: 599px) {
+            padding-top: 65px;
+        }
+    }
+}
