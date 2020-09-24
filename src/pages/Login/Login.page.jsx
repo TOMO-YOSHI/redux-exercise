@@ -1,11 +1,12 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import LoginInputArea from '../../components/LoginInputArea/LoginInputArea.component';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHandPointLeft } from "@fortawesome/free-solid-svg-icons";
 
-import { signInWithGoogle } from "../../firebase/firebase";
+import { loginWithGoogleAccount } from '../../redux/user/user.operations.js';
 
 import { useHistory } from 'react-router-dom';
 
@@ -15,6 +16,16 @@ import "./Login.styles.scss";
 
 const Login = () => {
     const history = useHistory();
+    const dispatch = useDispatch();
+
+    const loginWithGoogleAccountBackToHome = async() => {
+        const result = await dispatch(loginWithGoogleAccount());
+        if (result) {
+            history.push("/redux-exercise/");
+        } else {
+            return;
+        }
+    }
 
 
     return (
@@ -24,7 +35,10 @@ const Login = () => {
           <p>
             Login with your Email Address or
             <br />
-            <span className="googleAccount" onClick={signInWithGoogle}>
+            <span
+              className="googleAccount"
+              onClick={loginWithGoogleAccountBackToHome}
+            >
               Google Account
             </span>
             &nbsp;

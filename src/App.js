@@ -16,23 +16,42 @@ import Footer from './components/Footer/Footer.component.jsx'
 
 function App() {
     const dispatch = useDispatch();
+    const state = useSelector(state => state);
 
     useEffect(() => {
-      const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      const unsubscribeFromAuth = 
+      // auth.onAuthStateChanged();
+      auth.onAuthStateChanged(async (userAuth) => {
         if (userAuth) {
           const userRef = await createUserProfileDocument(userAuth);
           
-          userRef.onSnapshot((snapShot) => {
-            dispatch(
-              userLoginSignup(
-                {
-                  userName: snapShot.data().userName,
-                  authId: snapShot.id,
-                  isLogin: true
-                }
-              )
-            )
-          });
+          // userRef.onSnapshot((snapShot) => {
+          //   dispatch(
+          //     userLoginSignup(
+          //       {
+          //         userName: snapShot.userName,
+          //         authId: snapShot.id,
+          //         isLogin: true
+          //       }
+          //     )
+          //   )
+          // });
+
+          setTimeout(() => {
+            userRef.get().then(async (snapshot) => {
+              console.log(snapshot.data());
+              // console.log(userRef);
+              const userName = await snapshot.data().userName;
+              dispatch(
+                userLoginSignup({
+                  userName: userName,
+                  authId: userRef.id,
+                  isLogin: true,
+                })
+              );
+            });
+          }, 500);
+
         } else {
           dispatch(userInitialize());
         }
@@ -41,6 +60,10 @@ function App() {
         unsubscribeFromAuth();
       };
     }, [userLoginSignup]);
+
+    useEffect(()=>{
+      console.log(state.user.userInfo);
+    })
 
   return (
     <div className="App">

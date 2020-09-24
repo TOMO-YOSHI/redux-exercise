@@ -1,23 +1,38 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import FormInput from "../FormInput/FormInput.component";
 import IconLabelButton from '../IconLabelButton/IconLabelButton.component';
 
 import { auth } from "../../firebase/firebase";
+import { useHistory } from "react-router-dom";
+
+import { createUserProfileDocument } from "../../redux/user/user.operations";
+import { userLoginSignup, userInitialize } from "../../redux/user/user.actions";
+
 
 
 import "./LoginInputArea.styles.scss";
 
-const SignIn = () => {
+const Login = () => {
   const [userCredentials, setCredentials] = useState({
     email: "",
     password: "",
   });
 
+  const dispatch = useDispatch();
+
+  const history = useHistory();
+
   const { email, password } = userCredentials;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if ( !email || !password ) {
+        alert("Please fill in all fields");
+        return;
+    }
 
     try {
       await auth.signInWithEmailAndPassword(email, password);
@@ -25,6 +40,24 @@ const SignIn = () => {
         email: "",
         password: "",
       });
+
+      await auth.onAuthStateChanged(async (userAuth) => {
+        if (userAuth) {
+          const userRef = await createUserProfileDocument(userAuth);
+          
+          userRef.onSnapshot((snapShot) => {
+            dispatch(
+              userLoginSignup(
+                {
+                  userName: snapShot.data().userName,
+                  authId: snapShot.id,
+                  isLogin: true
+                }
+              )
+            )
+          });
+        }});
+      history.push("/redux-exercise/");
     } catch (error) {
       console.log(error);
     }
@@ -38,7 +71,7 @@ const SignIn = () => {
 
   return (
     <div className="loginInputArea">
-      <form onSubmit={handleSubmit}>
+      <form>
         <FormInput
           name="email"
           type="email"
@@ -57,14 +90,14 @@ const SignIn = () => {
         />
 
         <div className="buttons">
-          <IconLabelButton text="Login" icon={null} />
+          <IconLabelButton click={handleSubmit} text="Login" icon={null} />
         </div>
       </form>
     </div>
   );
 };
 
-export default SignIn;
+export default Login;
 
         //   <CustomButton type="submit"> Sign in </CustomButton>
         //   <CustomButton type="button" onClick={signInWithGoogle} isGoogleSignIn>

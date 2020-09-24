@@ -13,6 +13,8 @@ import { useHistory } from 'react-router-dom';
 
 import { auth } from '../../firebase/firebase.js';
 
+import './ButtonAppBar.styles.scss'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -33,14 +35,22 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonAppBar() {
     const [headerText, setheaderText] = useState("Chat Place");
-
-    const classes = useStyles();
+    const [userIsLogin, setUserIsLogin] = useState(false);
     const state = useSelector(state => state);
     const user = state.user.userInfo;
 
-    console.log(user);
+    const classes = useStyles();
 
-    let history = useHistory();
+    auth.onAuthStateChanged(function (userAuth) {
+      if (userAuth) {
+        setUserIsLogin(true);
+        // console.log(user);
+      } else {
+        setUserIsLogin(false);
+      }
+    });
+
+    const history = useHistory();
 
     useEffect(() => {
       return history.listen((location) => {
@@ -56,10 +66,20 @@ export default function ButtonAppBar() {
         } else {
           topic = topic.slice(topic.lastIndexOf("/") + 1);
         }
-        console.log(topic);
+        // console.log(topic);
         setheaderText(topic);
       });
     });
+
+    // useEffect(()=>{
+    //   auth.onAuthStateChanged(function (user) {
+    //     if (user) {
+    //       userIsLogin = true;
+    //     } else {
+    //       userIsLogin = false;
+    //     }
+    //   });
+    // })
     
   return (
     <div className={classes.root}>
@@ -91,7 +111,7 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             {headerText}
           </Typography>
-          { user.isLogin ? (
+          { userIsLogin ? (
             <Button
               color="inherit"
               onClick={() => auth.signOut()}

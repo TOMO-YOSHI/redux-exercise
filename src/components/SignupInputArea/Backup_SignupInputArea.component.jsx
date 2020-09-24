@@ -7,6 +7,7 @@ import IconLabelButton from '../IconLabelButton/IconLabelButton.component';
 import { createNewAccountWithEmail } from '../../redux/user/user.operations';
 
 import { useHistory } from "react-router-dom";
+import { auth } from "../../firebase/firebase";
 
 import "./SigninInputArea.styles.scss";
 
@@ -42,6 +43,11 @@ const Signup = () => {
     }
 
     try {
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+
       await dispatch(createNewAccountWithEmail(userName, email, password));
       setCredentials({
         userName: "",
