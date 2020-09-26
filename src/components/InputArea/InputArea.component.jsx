@@ -3,6 +3,9 @@ import IconLabelButtons from "../IconLabelButton/IconLabelButton.component";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { addCommentToDatabase } from '../../redux/comment/comment.operations.js';
+import { userNameChange } from '../../redux/user/user.actions';
+
+import { auth } from "../../firebase/firebase";
 
 import './inputArea.styles.scss';
 
@@ -22,11 +25,14 @@ const InputArea = (props) => {
       newCommentNo = "0" + newCommentNo;
     } 
     
-    const [userName, setUserName] = useState("No Name");
+    const [userName, setUserName] = useState("Visitor");
     const [message, setMessage] = useState("");
     const [commentNo, setCommentNo] = useState(newCommentNo);
+    const [userIsLogin, setUserIsLogin] = useState(false);
+
 
     const nameChangeHandler = (event) => {
+        dispatch(userNameChange(event.target.value));
         setUserName(event.target.value)
     }
     const messageChangeHandler = (event) => {
@@ -84,22 +90,63 @@ const InputArea = (props) => {
         setCommentNo(newCommentNo);
     },[comments])
 
+    // useEffect(() => {
+    //   if (!userInfo.isLogin) {
+    //     setUserName(userInfo.userName);
+    //   }
+    // });
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(function (userAuth) {
+      // setTimeout(() => {
+      if (userAuth) {
+        setUserName(userInfo.userName);
+        setUserIsLogin(true);
+        console.log("run 1");
+      } else {
+        setUserName(userInfo.userName);
+        setUserIsLogin(false);
+        console.log("run 2")
+      }
+      // }, 600);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  });
+
     return (
       <div className="inputAreaDiv">
         <form>
-          <input
-            type="text"
-            placeholder="Your Name"
-            // value={userName}
-            onChange={nameChangeHandler}
-          />
+          {userIsLogin ? (
+            <input
+              className="loginedUserNameInput"
+              // onFocus={this.blur()}
+              readOnly="readonly"
+              type="text"
+              value={userName}
+            />
+          ) : (
+            <input
+              type="text"
+              placeholder="Your Name"
+              onChange={nameChangeHandler}
+              value={userName}
+            />
+          )}
           <textarea
             placeholder="Write message"
             onChange={messageChangeHandler}
             value={message}
             required
           />
-          <IconLabelButtons text="send" icon="send" type="submit" click={submitComment} />
+          <IconLabelButtons
+            text="send"
+            icon="send"
+            type="submit"
+            click={submitComment}
+          />
         </form>
       </div>
     );
