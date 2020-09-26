@@ -61,8 +61,8 @@ export const commentsInitiate = (collectionId) => {
         .get()
         .then((snapshot) => {
           snapshot.forEach((doc) => {
-            const comment = doc.data();
-            //   console.log(comment);
+            let comment = doc.data();
+            comment = {...comment, id: doc.id}
             comments.push(comment);
           });
         });
