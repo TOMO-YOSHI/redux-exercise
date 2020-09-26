@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { commentsInitiate } from '../../redux/comment/comment.operations.js';
+import { commentsInitiate, commentsUpdate } from '../../redux/comment/comment.operations.js';
 import { getCommentList } from '../../redux/comment/comment.selector.js';
 
 import CommentListItem from '../CommentListItem/CommentListItem.component';
@@ -18,6 +18,8 @@ const CommentList = (props) => {
 
     useEffect(() => {
       dispatch(commentsInitiate("chat-" + topic));
+      dispatch(commentsUpdate("chat-" + topic));
+
       // console.log(topic)
       // dispatch(commentsInitiate("chat-greeting"));
     //   console.log(commentList);

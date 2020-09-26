@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useDispatch } from "react-redux";
 
 import SignupInputArea from '../../components/SignupInputArea/SignupInputArea.component';
@@ -10,23 +10,33 @@ import { loginWithGoogleAccount } from "../../redux/user/user.operations.js";
 
 import { useHistory } from "react-router-dom";
 
-
-
 import "./Signup.styles.scss";
 
 const Signup = () => {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const loginWithGoogleAccountBackToHome = async () => {
-        const result = await dispatch(loginWithGoogleAccount());
-        if (result) {
-          history.push("/redux-exercise/");
-        } else {
-          return;
-        }
-    };
+    // useEffect(() => {
+    //   const unsubscribe = auth.onAuthStateChanged(function (userAuth) {
+    //     if (userAuth) {
+    //       setTimeout(() => {
+    //         history.push("/redux-exercise/");
+    //       }, 1000);
+    //     }
+    //   });
+    //   return () => unsubscribe();
+    // });
 
+    const loginWithGoogleAccountBackToHome = async () => {
+      const result = await dispatch(loginWithGoogleAccount());
+      if (result) {
+          setTimeout(() => {
+            history.push("/redux-exercise/");
+          }, 500);
+      } else {
+        return;
+      }
+    };
 
     return (
       <div className="signupPageDiv">

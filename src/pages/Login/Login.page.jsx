@@ -10,23 +10,32 @@ import { loginWithGoogleAccount } from '../../redux/user/user.operations.js';
 
 import { useHistory } from 'react-router-dom';
 
-
-
 import "./Login.styles.scss";
 
 const Login = () => {
+
     const history = useHistory();
     const dispatch = useDispatch();
+
+    // useEffect(()=>{
+    //   const unsubscribe = auth.onAuthStateChanged(function (userAuth) {
+    //     if (userAuth) {
+    //       history.push("/redux-exercise/");
+    //     } 
+    //   });
+    //   return () => unsubscribe();
+    // })
 
     const loginWithGoogleAccountBackToHome = async() => {
         const result = await dispatch(loginWithGoogleAccount());
         if (result) {
+          setTimeout(() => {
             history.push("/redux-exercise/");
+          }, 500);
         } else {
             return;
         }
     }
-
 
     return (
       <div className="loginPageDiv">
@@ -37,6 +46,7 @@ const Login = () => {
             <br />
             <span
               className="googleAccount"
+              // onClick={dispatch(loginWithGoogleAccount)}
               onClick={loginWithGoogleAccountBackToHome}
             >
               Google Account

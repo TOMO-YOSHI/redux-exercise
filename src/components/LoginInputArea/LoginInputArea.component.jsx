@@ -8,7 +8,7 @@ import { auth } from "../../firebase/firebase";
 import { useHistory } from "react-router-dom";
 
 import { createUserProfileDocument } from "../../redux/user/user.operations";
-import { userLoginSignup, userInitialize } from "../../redux/user/user.actions";
+import { userLoginSignup } from "../../redux/user/user.actions";
 
 
 
@@ -25,6 +25,15 @@ const Login = () => {
   const history = useHistory();
 
   const { email, password } = userCredentials;
+
+  // useEffect(() => {
+  //   const unsubscribe = auth.onAuthStateChanged(function (userAuth) {
+  //     if (userAuth) {
+  //       history.push("/redux-exercise/");
+  //     }
+  //   });
+  //   return () => unsubscribe();
+  // });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -57,7 +66,9 @@ const Login = () => {
             )
           });
         }});
-      history.push("/redux-exercise/");
+
+        history.push("/redux-exercise/");
+
     } catch (error) {
       console.log(error);
     }
@@ -98,9 +109,3 @@ const Login = () => {
 };
 
 export default Login;
-
-        //   <CustomButton type="submit"> Sign in </CustomButton>
-        //   <CustomButton type="button" onClick={signInWithGoogle} isGoogleSignIn>
-        //     {" "}
-        //     Sign in with Google{" "}
-        //   </CustomButton>

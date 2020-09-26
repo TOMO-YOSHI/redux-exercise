@@ -2,16 +2,16 @@ import { commentActionTypes } from "./comment.actions";
 
 const INITIAL_STATE = {
   commentList: [
-    {
-      commentNo: "0000",
-      userName: "TOMO",
-      date: "09/22/2020",
-      time: "00:00",
-      message: [
+    // {
+      // commentNo: "0000",
+      // userName: "TOMO",
+      // date: "09/22/2020",
+      // time: "00:00",
+      // message: [
         // `Welcome to "Chatting Place"!!`,
         // `Hi, I'm Tomo, I developed this chat app!!`,
-      ],
-    },
+      // ],
+    // },
     // {
     //   commentNo: "0001",
     //   userName: "TOMO",

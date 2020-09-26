@@ -23,6 +23,15 @@ const Signup = () => {
 
   const { userName, email, password, confirmPass } = userCredentials;
 
+  // useEffect(() => {
+  //   const unsubscribe = auth.onAuthStateChanged(function (userAuth) {
+  //     if (userAuth) {
+  //       history.push("/redux-exercise/");
+  //     }
+  //   });
+  //   return () => unsubscribe();
+  // });
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
