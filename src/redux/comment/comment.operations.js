@@ -16,6 +16,7 @@ export const commentsUpdate = (collectionId) => {
           changes.forEach((change) => {
             if(change.type == "added") {
               const comment = change.doc.data();
+              console.log(comment);
               dispatch(addNewComment(comment));
             } else if (change.type == 'remove') {
               // delete comment action
@@ -72,13 +73,19 @@ export const commentsInitiate = (collectionId) => {
     }
 }
 
-export const addCommentToDatabase = (collectionId, comment) => {
+export const addCommentToDatabase = (collectionId, comment, authId) => {
     return async (dispatch, getState) => {
       const collectionRef = firestore.collection(collectionId);
 
-      await collectionRef.add(comment)
+      let newComment = comment;
 
-      dispatch(addNewComment(comment));
+      if (authId !== null) {
+        newComment = {...comment, userId: authId}
+      }
+
+      await collectionRef.add(newComment)
+
+      // dispatch(addNewComment(newComment));
     }
 }
 

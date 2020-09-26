@@ -9,6 +9,7 @@ import './inputArea.styles.scss';
 const InputArea = (props) => {
     const dispatch = useDispatch();
     const comments = useSelector(state => state.comments);
+    const userInfo = useSelector((state) => state.user.userInfo);
     let newCommentNo = comments.commentList.length + 1;
 
     const topic = props.topic;
@@ -71,7 +72,8 @@ const InputArea = (props) => {
             time: time,
             userName: sendUserName,
             message: sendMessage,
-            }
+            },
+            userInfo.authId
         )
       );
       // setUserName("No Name");
