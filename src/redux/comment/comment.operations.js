@@ -7,7 +7,7 @@ export const commentsUpdate = (collectionId) => {
       const collectionRef = firestore.collection(collectionId);
       // let comments = [];
 
-      await collectionRef
+      const unsubscribe = await collectionRef
         .orderBy("commentNo")
         .onSnapshot(snapshot => {
           // let comments = [];
@@ -29,29 +29,10 @@ export const commentsUpdate = (collectionId) => {
           // console.log(comments);
           // dispatch(commentListSetUp(comments));
         });
+      return unsubscribe;
     }
 }
-// export const commentsInitiate = (collectionId) => {
-//     return async (dispatch, getState) => {
-//       const collectionRef = firestore.collection(collectionId);
-//       // let comments = [];
 
-//       await collectionRef
-//         .orderBy("commentNo")
-//         .onSnapshot(snapshot => {
-//           let comments = [];
-//           // let changes = snapshot;
-//           let changes = snapshot.docChanges();
-//           changes.forEach((change) => {
-//             const comment = change.doc.data();
-//             console.log(comment);
-//             comments.push(comment);
-//           });
-//           console.log(comments);
-//           dispatch(commentListSetUp(comments));
-//         });
-//     }
-// }
 export const commentsInitiate = (collectionId) => {
     return async (dispatch, getState) => {
       const collectionRef = firestore.collection(collectionId);
@@ -88,26 +69,3 @@ export const addCommentToDatabase = (collectionId, comment, authId) => {
       // dispatch(addNewComment(newComment));
     }
 }
-
-// export const commentUpdate = (collectionId) => {
-//       return async (dispatch, getState) => {
-//         const collectionRef = firestore.collection(collectionId);
-//         // let comments = [];
-
-//         await collectionRef.onUpdate()
-//           .orderBy("commentNo")
-//           .onSnapshot((snapshot) => {
-//             let comments = [];
-//             // let changes = snapshot;
-//             let changes = snapshot.docChanges();
-//             changes.forEach((change) => {
-//               const comment = change.doc.data();
-//               console.log("update-1");
-//               comments.push(comment);
-//             });
-//             console.log("update-2");
-//             dispatch(commentListSetUp(comments));
-//           });
-//       };
-
-// }

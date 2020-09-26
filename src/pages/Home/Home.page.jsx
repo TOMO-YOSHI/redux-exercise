@@ -20,7 +20,7 @@ const Home = (props) => {
         setUserIsLogin(true);
         // console.log(userInfo);
       } else {
-        setUserName(userInfo.userName);
+        setUserName("Vistor");
         setUserIsLogin(false);
         // console.log(userInfo);
       }

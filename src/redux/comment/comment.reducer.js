@@ -26,8 +26,8 @@ const commentReducer = (state = INITIAL_STATE, action) => {
       case commentActionTypes.ADD_NEWCOMMENT:
         return {
           ...state,
-          // commentList: [...state.commentList, action.payload],
-          commentList: addCommentToList(state.commentList, action.payload),
+          commentList: [...state.commentList, action.payload],
+          // commentList: addCommentToList(state.commentList, action.payload),
         };
       default:
         return state;

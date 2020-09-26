@@ -1,39 +1,71 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { commentsInitiate, commentsUpdate } from '../../redux/comment/comment.operations.js';
+import { commentsInitiate } from '../../redux/comment/comment.operations.js';
 import { getCommentList } from '../../redux/comment/comment.selector.js';
+import { addNewComment } from '../../redux/comment/comment.actions'
 
 import CommentListItem from '../CommentListItem/CommentListItem.component';
+
+import { firestore } from "../../firebase/firebase";
 
 import './CommentList.styles.scss';
 
 const CommentList = (props) => {
-    const topic = props.topic;
+  const dispatch = useDispatch();
 
-    const classNameForBackgroundImage = topic + "BackGround";
+  const topic = props.topic;
+  const [commentList, setCommentList] = useState([])
 
-    const dispatch = useDispatch();
-    const state = useSelector((state) => state);
-    let commentList = getCommentList(state);
+  const classNameForBackgroundImage = topic + "BackGround";
+
+  const state = useSelector((state) => state);
+  let stateCommentList = getCommentList(state);
+    // setCommentList(stateCommentList);
+
+  useEffect( () => {
+    // console.log('page-init')
+    dispatch(commentsInitiate("chat-" + topic));
+  },[commentList]);
+
+  useEffect(()=> {
+      const collectionRef = firestore.collection("chat-" + topic);
+
+      const unsubscribe = collectionRef
+        .orderBy("commentNo")
+        .onSnapshot(snapshot => {
+          let changes = snapshot.docChanges();
+          changes.forEach((change) => {
+            if(change.type == "added") {
+              const comment = change.doc.data();
+              console.log(comment);
+              dispatch(addNewComment(comment));
+              setCommentList([...commentList, comment])
+            } else if (change.type == 'remove') {
+              // delete comment action
+            } else {
+              // const comment = change.doc.data();
+              // console.log(comment);
+              // comments.push(comment);
+            }
+          });
+        });
+      return () => unsubscribe();
+  }, [])
 
     useEffect(() => {
-      dispatch(commentsInitiate("chat-" + topic));
-      dispatch(commentsUpdate("chat-" + topic));
-    },[]);
-
-    useEffect(()=>{
-        const obj = document.querySelector(".commentListWrapper");
-        obj.scrollTop = obj.scrollHeight;
-        console.log(commentList);
-    }, [commentList])
+      const obj = document.querySelector(".commentListWrapper");
+      obj.scrollTop = obj.scrollHeight;
+      console.log(stateCommentList);
+      setCommentList(stateCommentList);
+    }, [commentList]);
 
     return (
       <div className={"commentListWrapper" + " " + classNameForBackgroundImage}>
-        <ul className="commentList">{
-            commentList.map(comment => 
-                <CommentListItem key={comment.id} comment={comment} />
-            )
-        }</ul>
+        <ul className="commentList">
+          {commentList.map((comment) => (
+            <CommentListItem key={comment.id} comment={comment} />
+          ))}
+        </ul>
       </div>
     );
 }

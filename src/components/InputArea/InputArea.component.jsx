@@ -29,6 +29,7 @@ const InputArea = (props) => {
     const [message, setMessage] = useState("");
     const [commentNo, setCommentNo] = useState(newCommentNo);
     const [userIsLogin, setUserIsLogin] = useState(false);
+    const [userId, setUserId] = useState(null);
 
 
     const nameChangeHandler = (event) => {
@@ -69,6 +70,12 @@ const InputArea = (props) => {
       
       const time = hours + ":" + mins
 
+      // if(userId) {
+      //   commentUserId = userInfo.authId;
+      // } else {
+      //   commentUserId = false;
+      // }
+
       dispatch(
         addCommentToDatabase(
             "chat-" + topic,
@@ -79,7 +86,9 @@ const InputArea = (props) => {
             userName: sendUserName,
             message: sendMessage,
             },
-            userInfo.authId
+            // userInfo.authId
+            // commentUserId
+            userId
         ));
       console.log("comment TEST");
       // setUserName("No Name");
@@ -100,9 +109,12 @@ const InputArea = (props) => {
     const unsubscribe = auth.onAuthStateChanged(function (userAuth) {
       if (userAuth) {
         setUserName(userInfo.userName);
+        setUserId(userInfo.authId);
         setUserIsLogin(true);
       } else {
-        setUserName(userInfo.userName);
+        // setUserName(userInfo.userName);
+        setUserName("Vistor");
+        setUserId(null);
         setUserIsLogin(false);
       }
     });

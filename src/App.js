@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useState, useEffect} from 'react';
 import './App.css';
 import { Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
@@ -17,6 +17,13 @@ import Footer from './components/Footer/Footer.component.jsx'
 function App() {
     const dispatch = useDispatch();
     const state = useSelector(state => state);
+    const [userInfo, setUserInfo] = useState({
+      userInfo: {
+        userName: "Visitor",
+        authId: null,
+        isLogin: false,
+      },
+    });
 
     useEffect(() => {
       const unsubscribeFromAuth = 
@@ -25,18 +32,6 @@ function App() {
         if (userAuth) {
           const userRef = await createUserProfileDocument(userAuth);
           
-          // userRef.onSnapshot((snapShot) => {
-          //   dispatch(
-          //     userLoginSignup(
-          //       {
-          //         userName: snapShot.userName,
-          //         authId: snapShot.id,
-          //         isLogin: true
-          //       }
-          //     )
-          //   )
-          // });
-
           setTimeout(() => {
             userRef.get().then(async (snapshot) => {
               console.log(snapshot.data());
@@ -61,9 +56,9 @@ function App() {
       };
     }, [userLoginSignup]);
 
-    useEffect(()=>{
-      console.log(state.user.userInfo);
-    })
+    // useEffect(()=>{
+    //   console.log(state.user.userInfo);
+    // })
 
   return (
     <div className="App">
