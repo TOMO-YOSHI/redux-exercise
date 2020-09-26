@@ -1,0 +1,43 @@
+
+.userComment {
+    padding: .25rem;
+    margin-bottom: .8rem;
+    background-color: white;
+
+    border-radius: 10px;
+
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
+
+
+    p {
+        margin: .5rem;
+        line-height: 1.5;
+    }
+
+    .commentData {
+        font-size: .75rem;
+
+        * {
+            margin-right: .5rem;
+        }
+    }
+}
+
+.editableComment {
+    background-color: #ffffe0;
+
+    .editDeleteDiv {
+        text-align: right;
+        font-size: small;
+        margin-right: .5rem;
+    }
+
+    .editButton,
+    .deleteButton {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

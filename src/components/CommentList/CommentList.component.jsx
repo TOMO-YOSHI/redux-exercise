@@ -19,10 +19,6 @@ const CommentList = (props) => {
     useEffect(() => {
       dispatch(commentsInitiate("chat-" + topic));
       dispatch(commentsUpdate("chat-" + topic));
-
-      // console.log(topic)
-      // dispatch(commentsInitiate("chat-greeting"));
-    //   console.log(commentList);
     },[]);
 
     useEffect(()=>{
@@ -35,7 +31,7 @@ const CommentList = (props) => {
       <div className={"commentListWrapper" + " " + classNameForBackgroundImage}>
         <ul className="commentList">{
             commentList.map(comment => 
-                <CommentListItem key={comment.commentNo} comment={comment} />
+                <CommentListItem key={comment.id} comment={comment} />
             )
         }</ul>
       </div>

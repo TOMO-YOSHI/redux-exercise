@@ -80,8 +80,8 @@ const InputArea = (props) => {
             message: sendMessage,
             },
             userInfo.authId
-        )
-      );
+        ));
+      console.log("comment TEST");
       // setUserName("No Name");
       setMessage("");
     };
@@ -98,17 +98,13 @@ const InputArea = (props) => {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(function (userAuth) {
-      // setTimeout(() => {
       if (userAuth) {
         setUserName(userInfo.userName);
         setUserIsLogin(true);
-        console.log("run 1");
       } else {
         setUserName(userInfo.userName);
         setUserIsLogin(false);
-        console.log("run 2")
       }
-      // }, 600);
     });
 
     return () => {
@@ -153,7 +149,3 @@ const InputArea = (props) => {
 }
 
 export default InputArea;
-
-          // <button type="submit" onClick={submitComment}>
-          //   SUBMIT
-          // </button>;
