@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ec6609e6e6a26f03ee7132ea4ed6071c",
+    "revision": "2b339cf99025ff1b700835289ad13594",
     "url": "/redux-exercise/index.html"
   },
   {
-    "revision": "794fad73275ba6d53ba3",
-    "url": "/redux-exercise/static/css/main.7d54556b.chunk.css"
+    "revision": "ece8fc4931dc592ffd90",
+    "url": "/redux-exercise/static/css/main.b6cf2260.chunk.css"
   },
   {
-    "revision": "5fd48e652d59f2903679",
-    "url": "/redux-exercise/static/js/2.4a73d59e.chunk.js"
+    "revision": "0ccb03fb1dfd1e1bde7d",
+    "url": "/redux-exercise/static/js/2.06cf6d2b.chunk.js"
   },
   {
     "revision": "5f8be6edcb631ea3c834b8459dc2c264",
-    "url": "/redux-exercise/static/js/2.4a73d59e.chunk.js.LICENSE.txt"
+    "url": "/redux-exercise/static/js/2.06cf6d2b.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "794fad73275ba6d53ba3",
-    "url": "/redux-exercise/static/js/main.516ef61b.chunk.js"
+    "revision": "ece8fc4931dc592ffd90",
+    "url": "/redux-exercise/static/js/main.b2ec12fd.chunk.js"
   },
   {
     "revision": "741f4efc5d05088f7a03",
