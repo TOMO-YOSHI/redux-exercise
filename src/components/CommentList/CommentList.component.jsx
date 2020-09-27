@@ -22,12 +22,16 @@ const CommentList = (props) => {
   let stateCommentList = getCommentList(state);
     // setCommentList(stateCommentList);
 
-  useEffect( () => {
-    // console.log('page-init')
-    dispatch(commentsInitiate("chat-" + topic));
-  },[commentList]);
+  // useEffect( () => {
+  //   console.log('page-init')
+  //   dispatch(commentsInitiate("chat-" + topic));
+  //   return () => setCommentList([]);
+  // },[]);
 
   useEffect(()=> {
+      console.log("page-init");
+      dispatch(commentsInitiate("chat-" + topic));
+
       const collectionRef = firestore.collection("chat-" + topic);
 
       const unsubscribe = collectionRef
@@ -37,9 +41,17 @@ const CommentList = (props) => {
           changes.forEach((change) => {
             if(change.type == "added") {
               const comment = change.doc.data();
-              console.log(comment);
+              // console.log(comment);
               dispatch(addNewComment(comment));
-              setCommentList([...commentList, comment])
+              // setCommentList([...commentList, comment])
+
+              // const newCommentList = commentList;
+              // console.log(newCommentList);
+              // newCommentList.push(comment);
+              // setCommentList(newCommentList);
+              
+              const obj = document.querySelector(".commentListWrapper");
+              obj.scrollTop = obj.scrollHeight;
             } else if (change.type == 'remove') {
               // delete comment action
             } else {
@@ -49,15 +61,21 @@ const CommentList = (props) => {
             }
           });
         });
-      return () => unsubscribe();
+      return () => {
+        unsubscribe();
+        setCommentList([]);
+      };
   }, [])
 
-    useEffect(() => {
-      const obj = document.querySelector(".commentListWrapper");
-      obj.scrollTop = obj.scrollHeight;
-      console.log(stateCommentList);
-      setCommentList(stateCommentList);
-    }, [commentList]);
+  useEffect(() => {
+    const obj = document.querySelector(".commentListWrapper");
+    obj.scrollTop = obj.scrollHeight;
+    // console.log(stateCommentList);
+    setCommentList(stateCommentList);
+
+    return () => setCommentList([]);
+    // }, []);
+  }, [stateCommentList]);
 
     return (
       <div className={"commentListWrapper" + " " + classNameForBackgroundImage}>
