@@ -1,5 +1,5 @@
 import { commentActionTypes } from "./comment.actions";
-import { addCommentToList } from './comment.utils';
+import { modifyComment, addCommentToList } from "./comment.utils";
 
 const INITIAL_STATE = {
   commentList: [
@@ -26,8 +26,13 @@ const commentReducer = (state = INITIAL_STATE, action) => {
       case commentActionTypes.ADD_NEWCOMMENT:
         return {
           ...state,
-          commentList: [...state.commentList, action.payload],
-          // commentList: addCommentToList(state.commentList, action.payload),
+          // commentList: [...state.commentList, action.payload],
+          commentList: addCommentToList(state.commentList, action.payload),
+        };
+      case commentActionTypes.MODIFY_COMMENT:
+        return {
+          ...state,
+          commentList: modifyComment(state.commentList, action.payload),
         };
       default:
         return state;

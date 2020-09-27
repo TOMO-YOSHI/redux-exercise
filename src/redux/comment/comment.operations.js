@@ -1,37 +1,6 @@
-import { commentListSetUp, addNewComment } from './comment.actions';
+import { commentListSetUp, addNewComment, modifyComment } from './comment.actions';
 
 import { firestore } from '../../firebase/firebase'
-
-export const commentsUpdate = (collectionId) => {
-    return async (dispatch, getState) => {
-      const collectionRef = firestore.collection(collectionId);
-      // let comments = [];
-
-      const unsubscribe = await collectionRef
-        .orderBy("commentNo")
-        .onSnapshot(snapshot => {
-          // let comments = [];
-          // let changes = snapshot;
-          let changes = snapshot.docChanges();
-          changes.forEach((change) => {
-            if(change.type == "added") {
-              const comment = change.doc.data();
-              console.log(comment);
-              dispatch(addNewComment(comment));
-            } else if (change.type == 'remove') {
-              // delete comment action
-            } else {
-              // const comment = change.doc.data();
-              // console.log(comment);
-              // comments.push(comment);
-            }
-          });
-          // console.log(comments);
-          // dispatch(commentListSetUp(comments));
-        });
-      return unsubscribe;
-    }
-}
 
 export const commentsInitiate = (collectionId) => {
     return async (dispatch, getState) => {
@@ -61,7 +30,7 @@ export const addCommentToDatabase = (collectionId, comment, authId) => {
       let newComment = comment;
 
       if (authId !== null) {
-        newComment = {...comment, userId: authId}
+        newComment = {...comment, userId: authId, isDeleted: false}
       }
 
       await collectionRef.add(newComment)
@@ -69,3 +38,52 @@ export const addCommentToDatabase = (collectionId, comment, authId) => {
       // dispatch(addNewComment(newComment));
     }
 }
+
+export const deleteComment = (collectionId, comment, ) => {
+  return async (dispatch, getState) => {
+      const collectionRef = firestore.collection(collectionId);
+
+      const newComment = {
+        ...comment,
+        deletedUserName: comment.userName,
+        deletedMessage: comment.message,
+        userName: "Deleted",
+        message: "Deleted",
+        isDeleted: true
+      };
+
+      await collectionRef.doc(comment.id).set(newComment);
+
+      dispatch(modifyComment(newComment));
+  }
+}
+
+// ***********************************************
+// Update function moved to CommentList.comppnent
+// ***********************************************
+
+// export const commentsUpdate = (collectionId) => {
+//   return async (dispatch, getState) => {
+//     const collectionRef = firestore.collection(collectionId);
+
+//     const unsubscribe = await collectionRef
+//       .orderBy("commentNo")
+//       .onSnapshot((snapshot) => {
+//         let changes = snapshot.docChanges();
+//         changes.forEach((change) => {
+//           if (change.type == "added") {
+//             let comment = change.doc.data();
+//             console.log(comment);
+//             comment = { ...comment, id: change.doc.id };
+//             dispatch(addNewComment(comment));
+//           } else if (change.type == "remove") {
+
+//           } else {
+
+//           }
+//         });
+//       });
+//     return unsubscribe;
+//   };
+// };
+

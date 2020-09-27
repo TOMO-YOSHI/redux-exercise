@@ -35,7 +35,7 @@ const Login = () => {
   //   return () => unsubscribe();
   // });
 
-  const handleSubmit = async (event) => {
+  const loginHandleSubmit = async (event) => {
     event.preventDefault();
 
     if ( !email || !password ) {
@@ -101,7 +101,7 @@ const Login = () => {
         />
 
         <div className="buttons">
-          <IconLabelButton click={handleSubmit} text="Login" icon={null} />
+          <IconLabelButton click={loginHandleSubmit} text="Login" icon={null} />
         </div>
       </form>
     </div>

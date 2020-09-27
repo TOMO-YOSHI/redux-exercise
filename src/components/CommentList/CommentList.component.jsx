@@ -29,59 +29,64 @@ const CommentList = (props) => {
   // },[]);
 
   useEffect(()=> {
-      console.log("page-init");
-      dispatch(commentsInitiate("chat-" + topic));
+    // console.log("page-init");
+    dispatch(commentsInitiate("chat-" + topic));
 
-      const collectionRef = firestore.collection("chat-" + topic);
+    const collectionRef = firestore.collection("chat-" + topic);
 
-      const unsubscribe = collectionRef
-        .orderBy("commentNo")
-        .onSnapshot(snapshot => {
-          let changes = snapshot.docChanges();
-          changes.forEach((change) => {
-            if(change.type == "added") {
-              const comment = change.doc.data();
-              // console.log(comment);
-              dispatch(addNewComment(comment));
-              // setCommentList([...commentList, comment])
+    const unsubscribe = collectionRef
+      .orderBy("commentNo")
+      .onSnapshot((snapshot) => {
+        let changes = snapshot.docChanges();
+        changes.forEach((change) => {
+          if (change.type == "added") {
+            let comment = change.doc.data();
+            // console.log(comment);
+            comment = { ...comment, id: change.doc.id };
+            dispatch(addNewComment(comment));
+            // setCommentList([...commentList, comment])
 
-              // const newCommentList = commentList;
-              // console.log(newCommentList);
-              // newCommentList.push(comment);
-              // setCommentList(newCommentList);
-              
-              const obj = document.querySelector(".commentListWrapper");
-              obj.scrollTop = obj.scrollHeight;
-            } else if (change.type == 'remove') {
-              // delete comment action
-            } else {
-              // const comment = change.doc.data();
-              // console.log(comment);
-              // comments.push(comment);
-            }
-          });
+            // const newCommentList = commentList;
+            // console.log(newCommentList);
+            // newCommentList.push(comment);
+            // setCommentList(newCommentList);
+
+            // const obj = document.querySelector(".commentListWrapper");
+            // obj.scrollIntoView(false);
+            // obj.scrollTop = obj.scrollHeight;
+          } else if (change.type == "remove") {
+            // delete comment action
+          } else {
+            // const comment = change.doc.data();
+            // console.log(comment);
+            // comments.push(comment);
+          }
         });
-      return () => {
-        unsubscribe();
-        setCommentList([]);
-      };
+      });
+    return () => {
+      unsubscribe();
+      setCommentList([]);
+    };
   }, [])
 
   useEffect(() => {
+    setCommentList(stateCommentList);
+    // console.log(stateCommentList);
     const obj = document.querySelector(".commentListWrapper");
     obj.scrollTop = obj.scrollHeight;
-    // console.log(stateCommentList);
-    setCommentList(stateCommentList);
 
     return () => setCommentList([]);
-    // }, []);
   }, [stateCommentList]);
 
     return (
       <div className={"commentListWrapper" + " " + classNameForBackgroundImage}>
         <ul className="commentList">
           {commentList.map((comment) => (
-            <CommentListItem key={comment.id} comment={comment} />
+            <CommentListItem
+              topic={"chat-" + topic}
+              key={comment.id}
+              comment={comment}
+            />
           ))}
         </ul>
       </div>

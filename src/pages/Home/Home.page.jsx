@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { getUserInfo } from '../../redux/user/user.selector.js';
 
-import { auth } from '../../firebase/firebase'
+import { auth, firestore } from '../../firebase/firebase'
 
 import './Home.styles.scss';
 
@@ -14,11 +14,21 @@ const Home = (props) => {
 
 
   useEffect(()=>{
-    const unsubscribe = auth.onAuthStateChanged(function (userAuth) {
+    const unsubscribe = auth.onAuthStateChanged(function async(userAuth) {
       if (userAuth) {
-        setUserName(userInfo.userName);
+        const collectionRef = firestore.collection("users");
+
+        collectionRef
+          .doc(userAuth.uid)
+          .get()
+          .then((snapshot) => setUserName(snapshot.data().userName));
+
+        // setTimeout(() => {
+        // setUserName(userInfo.userName);
+
         setUserIsLogin(true);
-        // console.log(userInfo);
+        // console.log(userAuth.uid);
+        // }, 500);
       } else {
         setUserName("Vistor");
         setUserIsLogin(false);
@@ -29,7 +39,11 @@ const Home = (props) => {
     return () => {
       unsubscribe();
     }
-  })
+  }, [userInfo])
+
+  // useEffect(()=>{
+
+  // }, [userInfo])
 
     return (
       <div className="homePageDiv">

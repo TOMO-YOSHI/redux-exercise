@@ -41,3 +41,14 @@
         }
     }
 }
+
+.deletedComponent {
+    background-color: #cccccc;
+
+    .editDeleteDiv {
+        text-align: right;
+        font-size: small;
+        margin-right: .5rem;
+        display: none;
+    }
+}

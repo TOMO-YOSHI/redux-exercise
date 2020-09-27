@@ -34,7 +34,9 @@ const InputArea = (props) => {
 
     const nameChangeHandler = (event) => {
         dispatch(userNameChange(event.target.value));
-        setUserName(event.target.value)
+        // console.log("change user name-1");
+        setUserName(event.target.value);
+        // console.log("change user name-2");
     }
     const messageChangeHandler = (event) => {
         setMessage(event.target.value)
@@ -90,7 +92,7 @@ const InputArea = (props) => {
             // commentUserId
             userId
         ));
-      console.log("comment TEST");
+      // console.log("comment TEST");
       // setUserName("No Name");
       setMessage("");
     };
@@ -113,16 +115,22 @@ const InputArea = (props) => {
         setUserIsLogin(true);
       } else {
         // setUserName(userInfo.userName);
-        setUserName("Vistor");
+        // setUserName("Vistor");
         setUserId(null);
         setUserIsLogin(false);
       }
     });
 
-    return () => {
-      unsubscribe();
-    };
-  });
+    unsubscribe();
+
+    // return () => {
+    //   unsubscribe();
+    // };
+  }, [userInfo]);
+
+  useEffect(() => {
+
+  })
 
     return (
       <div className="inputAreaDiv">

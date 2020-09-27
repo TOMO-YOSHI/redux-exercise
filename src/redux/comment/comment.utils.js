@@ -9,3 +9,16 @@ export const addCommentToList = (commentList, newComment) => {
 
     return [...commentList, newComment];
 };
+
+export const modifyComment = (commentList, newComment) => {
+  const exsistingCommentIndex = commentList.findIndex(
+    (comment) => comment.id === newComment.id
+  );
+
+  if (exsistingCommentIndex) {
+    commentList[exsistingCommentIndex] = newComment;
+    return [...commentList];
+  }
+
+  return [...commentList];
+};
