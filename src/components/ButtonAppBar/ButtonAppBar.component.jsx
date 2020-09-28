@@ -10,6 +10,10 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
+
+
 import { useHistory } from 'react-router-dom';
 
 import { auth } from '../../firebase/firebase.js';
@@ -104,9 +108,12 @@ export default function ButtonAppBar() {
     rightSideLink = (
       <Button
         color="inherit"
+        style={{
+          justifyContent: "flex-end"
+        }}
         onClick={() => history.push("/redux-exercise/profile")}
       >
-        Profile
+        <FontAwesomeIcon className="profileIcon" icon={faUserCircle} />
       </Button>
     );
   } else {
