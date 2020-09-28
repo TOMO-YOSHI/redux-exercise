@@ -1,7 +1,7 @@
-import React, { useState, useEffect} from 'react';
+import React, { useEffect} from 'react';
 import './App.css';
 import { Route, Switch } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { auth } from './firebase/firebase';
 import { createUserProfileDocument } from './redux/user/user.operations';
 import { userLoginSignup, userInitialize } from './redux/user/user.actions';
@@ -16,18 +16,17 @@ import Footer from './components/Footer/Footer.component.jsx'
 
 function App() {
     const dispatch = useDispatch();
-    const state = useSelector(state => state);
-    const [userInfo, setUserInfo] = useState({
-      userInfo: {
-        userName: "Visitor",
-        authId: null,
-        isLogin: false,
-      },
-    });
+    // const state = useSelector(state => state);
+    // const [userInfo, setUserInfo] = useState({
+    //   userInfo: {
+    //     userName: "Visitor",
+    //     authId: null,
+    //     isLogin: false,
+    //   },
+    // });
 
     useEffect(() => {
       const unsubscribeFromAuth = 
-      // auth.onAuthStateChanged();
       auth.onAuthStateChanged(async (userAuth) => {
         if (userAuth) {
           const userRef = await createUserProfileDocument(userAuth);
@@ -75,10 +74,3 @@ function App() {
 }
 
 export default App;
-
-      // <ButtonAppBar />
-      // <div className="pageStyle">
-      //   <CommentList />
-      //   <InputArea />
-      // </div>
-
