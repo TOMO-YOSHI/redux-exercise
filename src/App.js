@@ -10,6 +10,7 @@ import Home from './pages/Home/Home.page.jsx';
 import Chat from './pages/Chat/Chat.page.jsx';
 import Login from './pages/Login/Login.page.jsx';
 import Signup from './pages/Signup/Signup.page.jsx';
+import Profile from './pages/Profile/Profile.page.jsx';
 
 import ButtonAppBar from './components/ButtonAppBar/ButtonAppBar.component.jsx';
 import Footer from './components/Footer/Footer.component.jsx'
@@ -35,12 +36,15 @@ function App() {
             userRef.get().then(async (snapshot) => {
               console.log(snapshot.data());
               // console.log(userRef);
-              const userName = await snapshot.data().userName;
+              // const userName = await snapshot.data().userName;
+              // const userImageUrl = await snapshot.data().userImageUrl;
+              const { userName, userImageUrl} = await snapshot.data();
               dispatch(
                 userLoginSignup({
                   userName: userName,
                   authId: userRef.id,
                   isLogin: true,
+                  userImageUrl: userImageUrl,
                 })
               );
             });
@@ -67,6 +71,7 @@ function App() {
         <Route path="/redux-exercise/chat/:topic" component={Chat} />
         <Route path="/redux-exercise/login" component={Login} />
         <Route path="/redux-exercise/signup" component={Signup} />
+        <Route path="/redux-exercise/profile" component={Profile} />
       </Switch>
       <Footer />
     </div>

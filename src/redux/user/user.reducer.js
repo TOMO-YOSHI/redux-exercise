@@ -5,6 +5,8 @@ const INITIAL_STATE = {
     userName: "Visitor",
     authId: null,
     isLogin: false,
+    userImageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/chat-app-8976e.appspot.com/o/no_profile.png?alt=media&token=ab1a24c8-e687-4485-915c-e8b3da6d1738",
   },
 };
 
@@ -24,7 +26,15 @@ const userReducer = (state = INITIAL_STATE, action) => {
           },
         };
       case userActionTypes.USER_LOGOUT:
-        return INITIAL_STATE;
+        return state;
+      case userActionTypes.USER_IMAGE_GET:
+        return {
+          ...state,
+          userInfo: {
+            ...state.userInfo,
+            userImageUrl: action.payload,
+          },
+        };
       default:
         return state;
     }

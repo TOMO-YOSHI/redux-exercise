@@ -10,6 +10,11 @@ import './CommentListItem.styles.scss';
 
 import { useHistory } from "react-router-dom";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import NoProfile from '../../images/no_profile.png';
+
+
 
 const CommentListItem = (props) => {
   // const [userId, setUserId] = useState("");
@@ -59,17 +64,16 @@ const CommentListItem = (props) => {
         if (comment.userId === userId) {
           seteditDeletText(
             <div className="editDeleteDiv">
-              <span className="editButton">Edit</span> /{" "}
               <span
                 onClick={() => {
                   // console.log(comment);
                   // console.log(comment.id);
                   dispatch(deleteComment(threadTopic, comment));
-                }
-                }
+                }}
                 className="editButton"
               >
-                Delete
+                Delete&nbsp; &nbsp;
+                <FontAwesomeIcon icon={faTrash} />
               </span>
             </div>
           );
@@ -94,16 +98,27 @@ const CommentListItem = (props) => {
 
   return (
     <li className={listItemClassName}>
-      <p className="commentData">
-        <span className="commentNo">No.{comment.commentNo}</span>
-        <span className="commentName">{comment.userName}</span>
-        <span className="commentDate">{comment.date}</span>
-        <span className="commentTime">{comment.time}</span>
-      </p>
-      <div className="commentMessage">
-        <p>{comment.message}</p>
+      <img
+        className="commentAvator"
+        src={
+          !comment.userImageUrl || comment.isDeleted
+            ? NoProfile
+            : comment.userImageUrl
+        }
+        alt="comment_avator"
+      ></img>
+      <div className="commentContent">
+        <p className="commentData">
+          <span className="commentNo">No.{comment.commentNo}</span>
+          <span className="commentName">{comment.userName}</span>
+          <span className="commentDate">{comment.date}</span>
+          <span className="commentTime">{comment.time}</span>
+        </p>
+        <div className="commentMessage">
+          <p>{comment.message}</p>
+        </div>
+        {editDeletText}
       </div>
-      {editDeletText}
     </li>
   );
 }
@@ -113,3 +128,6 @@ export default CommentListItem;
     // <li
     //   className={editDeletText ? "editableComment userComment" : "userComment"}
     // >
+
+                  // <span className="editButton">Edit</span> /{" "}
+

@@ -84,59 +84,97 @@ export default function ButtonAppBar() {
     //     }
     //   });
     // })
-    
-  return (
-    <div className={classes.root}>
-      <AppBar position="static" style={{ background: "#100c08" }}>
-        <Toolbar>
-          {headerText !== "Chat Place" ? (
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="menu"
-              onClick={() => history.push("/redux-exercise/")}
-            >
-              <MenuIcon />
-            </IconButton>
-          ) : (
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              style={{
-                color: "#100c08",
-                cursor: "inherit",
-              }}
-              aria-label="menu"
-            >
-              <MenuIcon />
-            </IconButton>
-          )}
-          <Typography variant="h6" className={classes.title}>
-            {headerText}
-          </Typography>
-          { userIsLogin ? (
-            <Button
-              color="inherit"
-              onClick={
-                () => {
-                  auth.signOut();
-                  dispatch(userLogout());
-                }
-              }
-            >
-              Logout
-            </Button>
-          ) : (
-            <Button
-              color="inherit"
-              onClick={() => history.push("/redux-exercise/login")}
-            >
-              Login
-            </Button>
-          )}
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+
+  let rightSideLink;
+
+  if (userIsLogin && headerText === "profile") {
+    rightSideLink = (
+      <Button
+        color="inherit"
+        onClick={() => {
+          auth.signOut();
+          dispatch(userLogout());
+          history.push("/redux-exercise/");
+        }}
+      >
+        Logout
+      </Button>
+    );
+  } else if (userIsLogin && headerText !== "profile") {
+    rightSideLink = (
+      <Button
+        color="inherit"
+        onClick={() => history.push("/redux-exercise/profile")}
+      >
+        Profile
+      </Button>
+    );
+  } else {
+    rightSideLink = (
+      <Button
+        color="inherit"
+        onClick={() => history.push("/redux-exercise/login")}
+      >
+        Login
+      </Button>
+    );
+  }
+
+    return (
+      <div className={classes.root}>
+        <AppBar position="static" style={{ background: "#100c08" }}>
+          <Toolbar>
+            {headerText !== "Chat Place" ? (
+              <IconButton
+                edge="start"
+                className={classes.menuButton}
+                color="inherit"
+                aria-label="menu"
+                onClick={() => history.push("/redux-exercise/")}
+              >
+                <MenuIcon />
+              </IconButton>
+            ) : (
+              <IconButton
+                edge="start"
+                className={classes.menuButton}
+                style={{
+                  color: "#100c08",
+                  cursor: "inherit",
+                }}
+                aria-label="menu"
+              >
+                <MenuIcon />
+              </IconButton>
+            )}
+            <Typography variant="h6" className={classes.title}>
+              {headerText}
+            </Typography>
+            {rightSideLink}
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
 }
+
+            // {
+            //   userIsLogin ? (
+            //     <Button
+            //       color="inherit"
+            //       onClick={() => {
+            //         auth.signOut();
+            //         dispatch(userLogout());
+            //       }}
+            //     >
+            //       Logout
+            //     </Button>
+            //   ) : (
+            //     <Button
+            //       color="inherit"
+            //       onClick={() => history.push("/redux-exercise/login")}
+            //     >
+            //       Login
+            //     </Button>
+            //   );
+            // }
+

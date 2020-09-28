@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import IconLabelButtons from "../IconLabelButton/IconLabelButton.component";
+import IconLabelButton from "../IconLabelButton/IconLabelButton.component";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { addCommentToDatabase } from '../../redux/comment/comment.operations.js';
@@ -26,10 +26,11 @@ const InputArea = (props) => {
     } 
     
     const [userName, setUserName] = useState("Visitor");
-    const [message, setMessage] = useState("");
-    const [commentNo, setCommentNo] = useState(newCommentNo);
     const [userIsLogin, setUserIsLogin] = useState(false);
     const [userId, setUserId] = useState(null);
+
+    const [message, setMessage] = useState("");
+    const [commentNo, setCommentNo] = useState(newCommentNo);
 
 
     const nameChangeHandler = (event) => {
@@ -78,20 +79,30 @@ const InputArea = (props) => {
       //   commentUserId = false;
       // }
 
+      let userImageUrl;
+
+      if (userIsLogin) {
+        userImageUrl = userInfo.userImageUrl;
+      } else {
+        userImageUrl = null
+      }
+
       dispatch(
         addCommentToDatabase(
-            "chat-" + topic,
-            {
+          "chat-" + topic,
+          {
             commentNo: commentNo,
             date: date,
             time: time,
             userName: sendUserName,
             message: sendMessage,
-            },
-            // userInfo.authId
-            // commentUserId
-            userId
-        ));
+            userImageUrl: userImageUrl
+          },
+          // userInfo.authId
+          // commentUserId
+          userId
+        )
+      );
       // console.log("comment TEST");
       // setUserName("No Name");
       setMessage("");
@@ -157,7 +168,7 @@ const InputArea = (props) => {
             value={message}
             required
           />
-          <IconLabelButtons
+          <IconLabelButton
             text="send"
             icon="send"
             type="submit"

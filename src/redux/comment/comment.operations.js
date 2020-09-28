@@ -29,9 +29,9 @@ export const addCommentToDatabase = (collectionId, comment, authId) => {
 
       let newComment = comment;
 
-      if (authId !== null) {
-        newComment = {...comment, userId: authId, isDeleted: false}
-      }
+      // if (authId !== null) {
+        newComment = {...comment, userId: authId, isDeleted: false, commentedAt: new Date()}
+      // }
 
       await collectionRef.add(newComment)
 
@@ -49,7 +49,8 @@ export const deleteComment = (collectionId, comment, ) => {
         deletedMessage: comment.message,
         userName: "Deleted",
         message: "Deleted",
-        isDeleted: true
+        isDeleted: true,
+        deletedAt: new Date(),
       };
 
       await collectionRef.doc(comment.id).set(newComment);

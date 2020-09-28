@@ -1,15 +1,23 @@
-
 .userComment {
     padding: .25rem;
     margin-bottom: .8rem;
     background-color: white;
-
     border-radius: 10px;
 
     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
     -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
 
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    grid-gap: .5rem;
+
+    .commentAvator {
+        width: 100%;
+        align-self: center;
+        margin: .25rem;
+        border-radius: 50%;
+    }
 
     p {
         margin: .5rem;

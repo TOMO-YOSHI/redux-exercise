@@ -1,0 +1,57 @@
+.profilePageDiv {
+    height: 100%;
+
+    .profilePageBody {
+        padding-top: 95px;
+        height: 100%;
+
+        @media screen and (max-width: 599px) {
+            padding-top: 85px;
+        }
+    }
+
+    .profileImage {
+        width: 100px;
+        border-radius: 50%;
+    }
+
+    // .chooseProfileImage {
+    //     display: block;
+    //     margin: .5rem auto;
+    //     background-color: #e7e7e7;
+    //     color: black;
+    //     width: 100px;
+    //     font-size: 0.8rem;
+    // }
+
+    input#avatar {
+        display: none;
+    }
+
+    .displayNameLabel {
+        font-size: small;
+        display: block;
+        margin: 0.5rem;
+    }
+
+    .displayName {
+        display: inline-block;
+        max-width: 100px;
+        margin: 0rem auto .5rem;
+        font-size: 1rem;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: gray 1px solid;
+        text-align: center;
+        height: 1.25rem;
+        // margin-top: 0.5rem;
+        &:focus {
+           outline-width: 0;
+        }
+    }
+
+    button {
+        font-size: .8rem;
+    }
+}

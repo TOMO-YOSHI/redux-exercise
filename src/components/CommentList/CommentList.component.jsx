@@ -71,7 +71,7 @@ const CommentList = (props) => {
 
   useEffect(() => {
     setCommentList(stateCommentList);
-    // console.log(stateCommentList);
+    console.log(stateCommentList);
     const obj = document.querySelector(".commentListWrapper");
     obj.scrollTop = obj.scrollHeight;
 
